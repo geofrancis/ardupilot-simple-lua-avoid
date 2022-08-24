@@ -7,7 +7,7 @@ local rc_channel_switch = 7         -- switch this channel to "high" to get the 
 local min_range = 100               -- distance that maximum turning is applied.
 local max_range = 200               -- distance avoidance starts at.
 local circle_min = 1		    -- turning radius for maximum turning rate
-local circle_max = 2		    -- turning radius for minimum turning rate
+local circle_max = 5		    -- turning radius for minimum turning rate
 
 -- Fixed variables
 local omega_radps = target_speed_xy_mps/radius_target
