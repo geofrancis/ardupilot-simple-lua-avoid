@@ -4,10 +4,10 @@
 
 local target_speed_xy_mps = 0.5     -- target speed in m/s
 local rc_channel_switch = 7         -- switch this channel to "high" to get the script working
-local min_range = 100               -- min distance in cm before turning
-local max_range = 200
-local circle_min = 1
-local circle_max = 2
+local min_range = 100               -- distance that maximum turning is applied.
+local max_range = 200               -- distance avoidance starts at.
+local circle_min = 1		    -- turning radius for maximum turning rate
+local circle_max = 2		    -- turning radius for minimum turning rate
 
 -- Fixed variables
 local omega_radps = target_speed_xy_mps/radius_target
