@@ -15,6 +15,7 @@ local circle_max = 5		    -- turning radius for minimum turning rate
 local omega_radps = target_speed_xy_mps/radius_target
 local guided_mode = 15
 local auto_mode = 10
+local front_range = 0
 local front_left_range = 0
 local front_right_range = 0
 local left_range = 0
