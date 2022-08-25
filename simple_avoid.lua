@@ -41,7 +41,7 @@ gcs:send_text(0,"Script started")
 function update()
 
     if not circle_active then
-        last_mode = vehicle:get_mode()
+        last_mode = auto
     end
 
 
@@ -49,22 +49,27 @@ function update()
 -- get values from rangefinders
     local left_range = rangefinder:distance_cm_orient(6) (true)
   if not left_range then
+gcs:send_text(0, "No left rangefinder data 6")
     return update, 1000
   end
     local front_left_range = rangefinder:distance_cm_orient(7) (true)
   if not front_left_range then
+gcs:send_text(0, "No front left rangefinder data 7")
     return update, 1000
   end
 local front_range = rangefinder:distance_cm_orient(0) (true)
   if not front_range then
+gcs:send_text(0, "No front rangefinder data 0 ")
     return update, 1000
   end
 local front_right_range = rangefinder:distance_cm_orient(1) (true)
   if not front_right_range then
+gcs:send_text(0, "No front right rangefinder data 1 ")
     return update, 1000
   end
 local right_range = rangefinder:distance_cm_orient(2) (true)
   if not right_range then
+gcs:send_text(0, "No front rangefinder data 2 ")
     return update, 1000
   end
 
