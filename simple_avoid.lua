@@ -1,4 +1,4 @@
--- This scirpt uses Rover's turn rate controller to make the vehicle move in circles of fixed radius
+-- This scirpt uses Rover's turn rate controller to make the vehicle move in circles based on the distance to objects
 
 -- Edit these variables
 
@@ -107,7 +107,7 @@ end
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
 end
 							
---left and right sensors get half the vurn rate of the forward sensors
+--left and right sensors get half the turn rate of the forward sensors
    if  left_range < min_range and left_range < right_range and left_range < left_front_range then
     local function radius_target (left_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
