@@ -6,6 +6,8 @@ local target_speed_xy_mps = 0.5     -- target speed in m/s
 local rc_channel_switch = 7         -- switch this channel to "high" to get the script working
 local min_range = 100               -- distance that maximum turning is applied.
 local max_range = 200               -- distance avoidance starts at.
+local critical_range = 50cm	    -- minimum distance before stopping the vehicle.
+local close_range = 0
 local circle_min = 1		    -- turning radius for maximum turning rate
 local circle_max = 5		    -- turning radius for minimum turning rate
 
@@ -65,7 +67,14 @@ local front_right_range = rangefinder:distance_cm_orient(1) (true)
   end
 
 
-
+  if front_range < max_range and > 0 then close_range = front_range
+	else close_range = max_range
+end
+        if front_left_range < max_range and > 0 then close_range = front_left_range
+   else if front_right_range < close_range and > 0 then close_range = front_right_range
+   else if right_range < close_range and > 0 then close_range = right_range
+   else if left_range < right__range and > 0 then close_range = left_range
+end
 
   if  front_left_range < min_range and front_left_range < front_right_range then
     local function radius_target(front_left_range, min_range, max_range, circle_min, circle_max)
