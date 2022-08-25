@@ -70,8 +70,6 @@ end
         circle_active = true
             
     elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) < 1200 and circle_active then
-        -- set back to last mode since rc switch is low
-        vehicle:set_mode(last_mode)
         circle_active = false
     end
 
