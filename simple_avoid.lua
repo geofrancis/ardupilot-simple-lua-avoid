@@ -72,13 +72,21 @@ local right_range = rangefinder:distance_cm_orient(2) (true)
 
 --finding the closest range
   if front_range < max_range and > 0 then
-	close_range = front_range
- else close_range = max_range
-end
-        if front_left_range < close_range and > 0 then close_range = front_left_range
-   else if front_right_range < close_range and > 0 then close_range = front_right_range
-   else if right_range < close_range and > 0 then close_range = right_range
-   else if left_range < close_range and > 0 then close_range = left_range
+		close_range = front_range
+
+   else if front_left_range < close_range and > 0 then 
+		close_range = front_left_range
+	
+   else if front_right_range < close_range and > 0 then 
+		close_range = front_right_range
+		
+   else if right_range < close_range and > 0 then 
+		close_range = right_range
+			
+   else if left_range < close_range and > 0 then 
+		close_range = left_range
+					
+      else close_range = max_range				
 end
 
 --scaling speed based on closest object 
