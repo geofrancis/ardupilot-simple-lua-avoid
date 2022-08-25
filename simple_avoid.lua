@@ -30,12 +30,12 @@ end
 
 -- Script Start --
 
-gcs:send_text(0,"Script started")
-gcs:send_text(0,"Trajectory period: " .. tostring(2 * math.rad(180) / omega_radps))
-
-
 local circle_active = false
 local last_mode = 0
+
+gcs:send_text(0,"Script started")
+
+
 
 
 function update()
@@ -154,6 +154,7 @@ elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle
     if circle_active then
         --target turn rate in degrees including direction
         local target_turn_rate = math.deg(omega_radps * direction)
+        gcs:send_text(0,"Trajectory period: " .. tostring(2 * math.rad(180) / omega_radps))
 
         -- send guided message
         if not vehicle:set_desired_turn_rate_and_speed(target_turn_rate, speed_target) then
