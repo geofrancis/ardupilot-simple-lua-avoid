@@ -97,7 +97,18 @@ end
 			
 			
 			
---calculating the circle radius based on the distance to object 		
+--calculating the circle radius based on the distance to object 									
+--left and right sensors get half the turn rate of the forward sensors
+   if  left_range < min_range and left_range < right_range and left_range < left_front_range then
+    local function radius_target (left_range, min_range, max_range, circle_min, circle_max)
+    return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
+   radius_target = radius_target * 2												
+end
+  if  right_range < min_range and right_range < left_range and left range < front_left_range then
+    local function radius_target(right_range, min_range, max_range, circle_min, circle_max)
+    return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
+    radius_target = radius_target * 2
+end
   if  front_left_range < min_range and front_left_range < front_right_range then
     local function radius_target(front_left_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
@@ -105,19 +116,7 @@ end
   if  front_right_range < min_range and front_right_range < front_left_range then
     local function radius_target(front_right_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
-end
-							
---left and right sensors get half the turn rate of the forward sensors
-   if  left_range < min_range and left_range < right_range and left_range < left_front_range then
-    local function radius_target (left_range, min_range, max_range, circle_min, circle_max)
-    return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
-   radius_target = radius_target * 2
-end
-  if  right_range < min_range and right_range < left_range and left range < front_left_range then
-    local function radius_target(right_range, min_range, max_range, circle_min, circle_max)
-    return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
-    radius_target = radius_target * 2
-end
+end							
 								
 -- comparing the left and right rangefinders to figure out what direction to turn								
 							
