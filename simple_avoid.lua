@@ -81,7 +81,7 @@ end
 end
 
 --scaling speed based on closest object 
-  if  close_range < max_range and close_range < front_left_range then
+  if  close_range < max_range then
     local function speed_target(close_range, min_range, max_range, speed_min, speed_max)
     return math.floor((speed_target - min_range) * (speed_max - speed_min) / (min_range - min_range) + speed_max)
 end
