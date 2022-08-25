@@ -2,7 +2,7 @@
 
 -- Edit these variables
 
-local target_speed_xy_mps = 0.5     -- target speed in m/s
+
 local rc_channel_switch = 7         -- switch this channel to "high" to get the script working
 local min_range = 100               -- distance that maximum turning is applied.
 local max_range = 200               -- distance avoidance starts at.
@@ -106,8 +106,8 @@ end
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
     radius_target = radius_target / 2
 end
-
-	
+								
+-- comparing the left and right rangefinders to figure out what direction to turn								
 							
 if left_range < max_range and left_range < right_range then					
 	direction = 1
@@ -139,7 +139,7 @@ if
         local target_turn_rate = math.deg(omega_radps * direction)
 
         -- send guided message
-        if not vehicle:set_desired_turn_rate_and_speed(target_turn_rate, target_speed_xy_mps) then
+        if not vehicle:set_desired_turn_rate_and_speed(target_turn_rate, speed_target) then
             gcs:send_text(0, "Failed to send target ")
         end
     end
