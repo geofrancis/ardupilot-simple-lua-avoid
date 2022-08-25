@@ -16,6 +16,7 @@ local speed_max = 1
 local omega_radps = target_speed_xy_mps/radius_target
 local guided_mode = 15
 local auto_mode = 10
+local hold_mode = 4
 local front_range = 0
 local front_left_range = 0
 local front_right_range = 0
@@ -126,12 +127,18 @@ else 	circle_active = false
 end
 if 								
 							
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) 
+    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and close_range > critical range then 
         -- set guided mode and circle to the right 
         vehicle:set_mode(guided_mode)
+													
+else if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and close_range < critical range then 
+        vehicle:set_mode(hold_mode)
+												
 
     elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) < 1200 and circle_active then
         circle_active = false
+
+
     end
 
     if circle_active then
