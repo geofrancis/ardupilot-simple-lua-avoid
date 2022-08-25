@@ -116,7 +116,8 @@ if left_range < max_range and left_range < right_range then
         circle_active = true						
 else if right_range < max_range and right_range < left_range then
 	direction = -1	
-	circle_active = true							
+	circle_active = true
+		--running front sensors last so they get priority								
 else if	front_left_range < max_range and front_left_range < front_left_range then
 	direction = 1	
 	circle_active = true								
