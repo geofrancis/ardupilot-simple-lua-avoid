@@ -52,7 +52,7 @@ function update()
     return update, 1000
   end
     local front_left_range = rangefinder:distance_cm_orient(7) (true)
-  if not left_range then
+  if not front_left_range then
     return update, 1000
   end
 local front_range = rangefinder:distance_cm_orient(0) (true)
