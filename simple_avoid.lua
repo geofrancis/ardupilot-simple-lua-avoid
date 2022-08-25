@@ -69,7 +69,7 @@ gcs:send_text(0, "No front right rangefinder data 1 ")
   end
 local right_range = rangefinder:distance_cm_orient(2) (true)
   if not right_range then
-gcs:send_text(0, "No front rangefinder data 2 ")
+gcs:send_text(0, "No right rangefinder data 2 ")
     return update, 1000
   end
 
