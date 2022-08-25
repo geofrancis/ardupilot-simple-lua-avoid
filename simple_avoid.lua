@@ -18,7 +18,7 @@ local front_right_range = 0
 local left_range = 0
 local right_range = 0
 local direction = 1
-local radius_target = 0
+local radius_target = 2
 end
 
 
@@ -42,6 +42,7 @@ function update()
   if not left_range then
     return update, 1000
   end
+
     local front_left_range = rangefinder:distance_cm_orient(7) (true)
   if not left_range then
     return update, 1000
@@ -108,8 +109,8 @@ end
         direction = -1
         circle_active = true			
             
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and right_range < min range and right_range < left_range then
-        -- set guided mode and circle to the left 
+   if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and right_range < min range and right_range < left_range then
+        --set guided mode and circle to the left 
         vehicle:set_mode(guided_mode)
         direction = -1
         circle_active = true
