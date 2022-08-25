@@ -125,17 +125,15 @@ else if	front_right_range < max_range and front_right_range < front_right_range 
 else 	circle_active = false 
 	direction = 0
 end
-if 								
-							
+					
+	 -- set guided mode to avoid 
     if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and close_range > critical range then 
-        -- set guided mode and circle to the right 
         vehicle:set_mode(guided_mode)
-													
-else if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and close_range < critical range then 
+	--set Hold mode if distance is critical												
+elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and close_range < critical range then 
         vehicle:set_mode(hold_mode)
-												
-
-    elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) < 1200 and circle_active then
+	--disable avoidance											
+ elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) < 1200 and circle_active then
         circle_active = false
 
 
