@@ -40,33 +40,33 @@ function update()
         last_mode = vehicle:get_mode()
     end
 
+
+
+-- get values from rangefinders
     local left_range = rangefinder:distance_cm_orient(6) (true)
   if not left_range then
     return update, 1000
   end
-
     local front_left_range = rangefinder:distance_cm_orient(7) (true)
   if not left_range then
     return update, 1000
   end
-
 local front_range = rangefinder:distance_cm_orient(0) (true)
   if not front_range then
     return update, 1000
   end
-
 local front_right_range = rangefinder:distance_cm_orient(1) (true)
   if not front_right_range then
     return update, 1000
   end
-
-
-    local right_range = rangefinder:distance_cm_orient(2) (true)
+local right_range = rangefinder:distance_cm_orient(2) (true)
   if not right_range then
     return update, 1000
   end
 
 
+
+--finding the closest range
   if front_range < max_range and > 0 then close_range = front_range
 	else close_range = max_range
 end
@@ -76,23 +76,21 @@ end
    else if left_range < right__range and > 0 then close_range = left_range
 end
 
+			
+--calculating the circle radius based on the distance to object 		
   if  front_left_range < min_range and front_left_range < front_right_range then
     local function radius_target(front_left_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
 end
-
-
   if  front_right_range < min_range and front_right_range < front_left_range then
     local function radius_target(front_right_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
 end
-    
-  if  left_range < min_range and left_range < right_range and left_range < left_front_range then
+   if  left_range < min_range and left_range < right_range and left_range < left_front_range then
     local function radius_target (left_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
    radius_target = radius_target / 2
 end
-
   if  right_range < min_range and right_range < left_range and left range < front_left_range then
     local function radius_target(right_range, min_range, max_range, circle_min, circle_max)
     return math.floor((radius_target - min_range) * (circle_max - circle_min) / (min_range - min_range) + circle_max)
@@ -101,14 +99,14 @@ end
 
 	
 	
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and front_left_range < min_range and front_left_range < front_right_range then
+    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and front_left_range < max_range and front_left_range < front_right_range then
         -- set guided mode and circle to the right 
         vehicle:set_mode(guided_mode)
         direction = 1
         circle_active = true
 			
 			
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and left_range < min_range and left_range < right_range then
+    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and left_range < max_range and left_range < right_range then
         -- set guided mode and circle to the right 
         vehicle:set_mode(guided_mode)
         direction = 1
@@ -120,7 +118,7 @@ end
         direction = -1
         circle_active = true			
             
-   if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and right_range < min range and right_range < left_range then
+   if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and right_range < max_range and right_range < left_range then
         --set guided mode and circle to the left 
         vehicle:set_mode(guided_mode)
         direction = -1
