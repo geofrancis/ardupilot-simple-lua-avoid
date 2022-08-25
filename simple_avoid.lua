@@ -10,7 +10,8 @@ local critical_range = 50cm	    -- minimum distance before stopping the vehicle.
 local close_range = 0
 local circle_min = 1		    -- turning radius for maximum turning rate
 local circle_max = 5		    -- turning radius for minimum turning rate
-
+local speed_min = 0.1
+local speed_max = 1
 -- Fixed variables
 local omega_radps = target_speed_xy_mps/radius_target
 local guided_mode = 15
@@ -22,6 +23,7 @@ local left_range = 0
 local right_range = 0
 local direction = 1
 local radius_target = 2
+local speed_target = 1
 end
 
 
@@ -77,6 +79,13 @@ end
    else if left_range < right__range and > 0 then close_range = left_range
 end
 
+--scaling speed based on closest object 
+  if  close_range < max_range and close_range < front_left_range then
+    local function speed_target(close_range, min_range, max_range, speed_min, speed_max)
+    return math.floor((speed_target - min_range) * (speed_max - speed_min) / (min_range - min_range) + speed_max)
+end
+			
+			
 			
 --calculating the circle radius based on the distance to object 		
   if  front_left_range < min_range and front_left_range < front_right_range then
@@ -99,32 +108,28 @@ end
 end
 
 	
-	
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and front_left_range < max_range and front_left_range < front_right_range then
+							
+if left_range < max_range and left_range < right_range then					
+	direction = 1
+        circle_active = true						
+else if right_range < max_range and right_range < left_range then
+	direction = -1	
+	circle_active = true							
+else if	front_left_range < max_range and front_left_range < front_left_range then
+	direction = 1	
+	circle_active = true								
+else if	front_right_range < max_range and front_right_range < front_right_range then
+	direction = -1	
+	circle_active = true	
+else 	circle_active = false 
+	direction = 0
+end
+if 								
+							
+    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) 
         -- set guided mode and circle to the right 
         vehicle:set_mode(guided_mode)
-        direction = 1
-        circle_active = true
-			
-			
-    if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and left_range < max_range and left_range < right_range then
-        -- set guided mode and circle to the right 
-        vehicle:set_mode(guided_mode)
-        direction = 1
-        circle_active = true
-				
-   if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and front_right_range < min_range and front_right_range < front_left_range then
-        -- set guided mode and circle to the left 
-        vehicle:set_mode(guided_mode)
-        direction = -1
-        circle_active = true			
-            
-   if arming:is_armed() and rc:get_pwm(rc_channel_switch) > 1700 and not circle_active and (vehicle:get_mode() == auto_mode) and right_range < max_range and right_range < left_range then
-        --set guided mode and circle to the left 
-        vehicle:set_mode(guided_mode)
-        direction = -1
-        circle_active = true
-            
+
     elseif arming:is_armed() and rc:get_pwm(rc_channel_switch) < 1200 and circle_active then
         circle_active = false
     end
