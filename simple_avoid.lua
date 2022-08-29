@@ -6,10 +6,10 @@
 local rc_channel_switch = 7         -- switch this channel to "high" to get the script working
 local min_range = 100               -- distance that maximum turning is applied.
 local max_range = 200               -- distance avoidance starts at.
-local critical_range = 50cm	    -- minimum distance before stopping the vehicle.
+local critical_range = 50	    -- minimum distance before stopping the vehicle.
 local close_range = 0
-local circle_min = 1		    -- turning radius for maximum turning rate
-local circle_max = 5		    -- turning radius for minimum turning rate
+local circle_min = 100		    -- turning radius for maximum turning rate
+local circle_max = 500		    -- turning radius for minimum turning rate
 local speed_min = 0.1
 local speed_max = 1
 -- Fixed variables
